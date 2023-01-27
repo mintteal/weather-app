@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <Layout home={true}>
-      <section className='container'>
+      <section className='container container-home'>
         <div className='container__header'>
           <h1>Weather forecasts</h1>
           <p>

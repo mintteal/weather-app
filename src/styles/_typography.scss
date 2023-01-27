@@ -10,3 +10,19 @@
 
   color: $light;
 }
+
+[class$='-sm'] {
+  font-size: 1.25rem;
+}
+
+[class$='-md'] {
+  font-size: 1.5rem;
+}
+
+[class$='-lg'] {
+  font-size: 1.75rem;
+}
+
+[class$='-xl'] {
+  font-size: 2rem;
+}

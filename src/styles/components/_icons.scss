@@ -1,26 +1,10 @@
 @use '../colors' as *;
 
-// Default variants
+// Default
 .icon {
   fill: $light;
   color: $light;
   transition: all 0.1s;
-
-  &-sm {
-    font-size: 1.25rem;
-  }
-
-  &-md {
-    font-size: 1.5rem;
-  }
-
-  &-lg {
-    font-size: 1.75rem;
-  }
-
-  &-xl {
-    font-size: 2rem;
-  }
 }
 
 // Item specific variants
@@ -35,10 +19,10 @@
   }
 
   &-wide {
-    font-size: 7rem;
+    font-size: 9rem;
   }
 
   &-compact {
-    font-size: 5rem;
+    font-size: 7rem;
   }
 }

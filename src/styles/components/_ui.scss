@@ -1,6 +1,6 @@
 @use '../colors' as *;
 
-// Form & input components
+//// Form & input components
 .form__label {
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
   font-size: 0.9rem;
 }
 
-// Buttons
+//// Buttons
 .btn {
   background: transparent;
   border: none;
@@ -34,6 +34,16 @@
   justify-content: center;
 }
 
+// variants
+.btn-default {
+  background-color: $dark-2;
+  padding: 0.5rem 2rem;
+
+  &:is(:hover, :focus) {
+    background-color: rgba($dark-1, 0.6);
+  }
+}
+
 .btn-outlined {
   outline: 1px solid white;
 
@@ -48,7 +58,7 @@
   }
 }
 
-// Cards
+//// Cards
 .card {
   display: flex;
   border-radius: 0.5rem;
@@ -56,6 +66,7 @@
   overflow: hidden;
 }
 
+// variants
 .card-img {
   $size: 15rem;
   height: $size;
@@ -63,7 +74,7 @@
   background-size: cover;
   filter: grayscale(100%);
   -webkit-filter: grayscale(100%);
-  transition: all .15s ease-out;
+  transition: all 0.15s ease-out;
 
   .card__title {
     width: 100%;
@@ -73,7 +84,7 @@
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0) 30%,
-      rgba(0, 0, 0, .5) 100%
+      rgba(0, 0, 0, 0.5) 100%
     );
     backdrop-filter: blur(1px);
   }

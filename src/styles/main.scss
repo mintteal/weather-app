@@ -6,6 +6,9 @@
 // Layout elements
 @use './components/layout' as *;
 
+// City forecasts
+@use './components/forecast/weather' as *;
+@use './components/forecast/city' as *;
 
 // UI components
 @use './components/icons' as *;
