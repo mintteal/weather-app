@@ -47,3 +47,42 @@
     fill: $accent-yellow;
   }
 }
+
+// Cards
+.card {
+  display: flex;
+  border-radius: 0.5rem;
+  background-color: rgba($accent-yellow, 0.1);
+  overflow: hidden;
+}
+
+.card-img {
+  $size: 15rem;
+  height: $size;
+  width: $size;
+  background-size: cover;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  transition: all .15s ease-out;
+
+  .card__title {
+    width: 100%;
+    align-self: flex-end;
+    font-size: 1.75rem;
+    padding: 1rem 0.5rem;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(0, 0, 0, .5) 100%
+    );
+    backdrop-filter: blur(1px);
+  }
+
+  &:is(:hover, :focus) {
+    filter: none;
+  }
+}
+
+#tre-card {
+  background-image: url('../../../public/tampere.jpg');
+}

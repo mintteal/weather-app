@@ -2,18 +2,24 @@ import React from 'react';
 import { Search, Button } from '..';
 import { Logo, PrevIcon } from '@/utils/icons';
 
-const Sidebar = () => {
+interface ISidebar {
+  home?: boolean;
+}
+
+const Sidebar = ({ home }: ISidebar) => {
   return (
     <aside className='sidebar'>
       <Logo className='icon icon-site' />
 
       <Search label='Search city' />
 
-      <Button
-        variant='outlined'
-        icon={<PrevIcon className='icon icon-md' />}
-        text='Back'
-      />
+      {!home && (
+        <Button
+          variant='outlined'
+          icon={<PrevIcon className='icon icon-md' />}
+          text='Back'
+        />
+      )}
     </aside>
   );
 };

@@ -3,11 +3,12 @@ import Head from 'next/head';
 import { Sidebar } from '../index';
 
 interface ISite {
+  home?: boolean;
   title?: string;
   children?: React.ReactNode;
 }
 
-const Layout = ({ title = 'Weather App', children }: ISite) => {
+const Layout = ({ home, title = 'Weather App', children }: ISite) => {
   return (
     <>
       <Head>
@@ -17,11 +18,8 @@ const Layout = ({ title = 'Weather App', children }: ISite) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <Sidebar />
-      <main>
-        <h2>Content</h2>
-        {children}
-      </main>
+      <Sidebar home={home} />
+      <main>{children}</main>
     </>
   );
 };

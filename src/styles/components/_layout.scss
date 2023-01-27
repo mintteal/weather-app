@@ -5,7 +5,6 @@
   background: $dark-1;
   padding: 2rem 1.5rem;
   width: 18rem;
-  width: 18rem;
 
   display: flex;
   flex-direction: column;
@@ -16,5 +15,36 @@
     position: absolute;
     bottom: 3rem;
     align-self: center;
+  }
+}
+
+// Section container
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 3rem 5rem;
+  text-align: center;
+  gap: 2rem;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.15rem;
+    }
+  }
+
+  &__content {
+    display: flex;
   }
 }
