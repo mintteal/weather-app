@@ -14,12 +14,11 @@ body {
 }
 
 body {
-  background: $dark-1;
+  background: $dark-2;
 }
 
 #__next {
-  display: grid;
-  grid-template-columns: 15rem auto;
+  display: flex;
   height: 100%;
 }
 

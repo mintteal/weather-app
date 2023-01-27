@@ -1,0 +1,49 @@
+@use '../colors' as *;
+
+// Form & input components
+.form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form__input-search * {
+  color: black;
+}
+
+.form__menu * {
+  font-size: 0.9rem;
+}
+
+// Buttons
+.btn {
+  background: transparent;
+  border: none;
+  border-radius: 1rem;
+
+  font-size: 1rem;
+  padding: 0.25rem 2rem;
+  width: fit-content;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.btn:has(.icon) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-outlined {
+  outline: 1px solid white;
+
+  &:is(:hover, :focus) {
+    color: $accent-yellow;
+    background: rgba($accent-yellow, 0.1);
+    outline: 1px solid $accent-yellow;
+  }
+
+  &:is(:hover, :focus) .icon {
+    fill: $accent-yellow;
+  }
+}

@@ -1,0 +1,44 @@
+@use '../colors' as *;
+
+// Default variants
+.icon {
+  fill: $light;
+  color: $light;
+  transition: all 0.1s;
+
+  &-sm {
+    font-size: 1.25rem;
+  }
+
+  &-md {
+    font-size: 1.5rem;
+  }
+
+  &-lg {
+    font-size: 1.75rem;
+  }
+
+  &-xl {
+    font-size: 2rem;
+  }
+}
+
+// Item specific variants
+.icon {
+  &-site {
+    fill: $accent-yellow;
+    font-size: 5rem;
+    border: 3px solid $accent-yellow;
+    border-radius: 50%;
+    padding: 0.75rem;
+    align-self: center;
+  }
+
+  &-wide {
+    font-size: 7rem;
+  }
+
+  &-compact {
+    font-size: 5rem;
+  }
+}

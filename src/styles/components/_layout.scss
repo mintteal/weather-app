@@ -1,0 +1,20 @@
+@use '../colors' as *;
+
+// Sidebar
+.sidebar {
+  background: $dark-1;
+  padding: 2rem 1.5rem;
+  width: 18rem;
+  width: 18rem;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5rem;
+
+  .btn {
+    position: absolute;
+    bottom: 3rem;
+    align-self: center;
+  }
+}

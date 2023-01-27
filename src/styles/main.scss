@@ -2,3 +2,11 @@
 @use './typography' as *;
 
 @use './globals' as *;
+
+// Layout elements
+@use './components/layout' as *;
+
+
+// UI components
+@use './components/icons' as *;
+@use './components/ui' as *;
