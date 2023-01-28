@@ -4,7 +4,6 @@ export { default as Layout } from './layout/Layout';
 export { default as Sidebar } from './layout/Sidebar';
 
 // City forecast
-export { default as City } from './forecast/City';
 export { default as Weather } from './forecast/Weather';
 
 // UI components

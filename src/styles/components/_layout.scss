@@ -9,7 +9,15 @@
   display: flex;
   flex-direction: column;
 
-  gap: 5rem;
+  gap: 2rem;
+
+  &__description {
+    text-align: center;
+  }
+
+  &__description p:not(:last-child) {
+    margin-bottom: 1rem;
+  }
 
   .btn {
     position: absolute;
