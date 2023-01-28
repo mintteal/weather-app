@@ -9,19 +9,19 @@ interface ISearch {
 
 const options = [
   {
-    value: 'Helsinki',
+    value: 'helsinki',
     label: 'Helsinki',
     lat: 60.17,
     lon: 24.95,
   },
   {
-    value: 'Tampere',
+    value: 'tampere',
     label: 'Tampere',
     lat: 61.5,
     lon: 23.8,
   },
   {
-    value: 'Turku',
+    value: 'turku',
     label: 'Turku',
     lat: 60.45,
     lon: 22.28,
@@ -33,7 +33,6 @@ const SearchInput = ({ label }: ISearch) => {
     <label className='form__label'>
       {_.capitalize(label)}
       <Select
-        isMulti
         className='form__input form__input-search'
         classNamePrefix='form'
         options={options}

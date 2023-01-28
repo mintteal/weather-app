@@ -8,13 +8,32 @@ let _ = require('lodash');
 
 interface ICity {
   name: string;
+  data: any;
 }
 
-const City = ({ name }: ICity) => {
+const options = [
+  {
+    value: 'helsinki',
+    lat: 60.17,
+    lon: 24.95,
+  },
+  {
+    value: 'tampere',
+    lat: 61.5,
+    lon: 23.8,
+  },
+  {
+    value: 'turku',
+    lat: 60.45,
+    lon: 22.28,
+  },
+];
+
+const City = ({ name, data }: ICity) => {
   const router = useRouter();
-  const { cityName } = router.query;
 
   const [range, setRange] = useState<number>(1);
+  console.log('city:', data);
 
   if (router.isFallback) {
     return (
@@ -56,5 +75,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const name = (await params?.name) as string;
-  return { props: { name } };
+  const city = await options.find((option) => option.value === name);
+
+  const settings =
+    '&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum&timezone=auto';
+
+  const res = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${city?.lat}&longitude=${city?.lon}${settings}`
+  );
+  const data = await res.json();
+
+  return { props: { name, data } };
 };

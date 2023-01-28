@@ -21,7 +21,7 @@ const Sidebar = ({ home }: ISidebar) => {
         </p>
       </div>
 
-      <Search label='Search city' />
+      {/* <Search label='Search city' /> */}
 
       {!home && (
         <Link className='btn btn-outlined' href='/'>
