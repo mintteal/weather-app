@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Button, Layout, Weather } from '@/components';
-
+import { parseData } from '@/utils/helpers';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import update from 'immutability-helper';
 let _ = require('lodash');
 
 interface ICity {
@@ -41,56 +40,15 @@ interface Weather {
   snowfall_sum: number;
 }
 
-interface Data {
-  [i: number]: {
-    [i: number]: string | number;
-  };
-}
-
 const City = ({ name, data }: ICity) => {
   const router = useRouter();
-
-  const parseData = () => {
-    let arr: any = [];
-
-    if (data) {
-      // Save needed data in helper variable
-      let daily: Data[] = data.daily;
-
-      let obj: Weather = {
-        time: '',
-        weathercode: 0,
-        temperature_2m_max: 0,
-        temperature_2m_min: 0,
-        sunrise: '',
-        sunset: '',
-        rain_sum: 0,
-        showers_sum: 0,
-        snowfall_sum: 0,
-      };
-
-      /* 
-        API returns data for seven days, so iterate through object entries
-        for seven times and set connected values to an object. 
-        Push every object into an array.
-        */
-
-      for (let i = 0; i < 7; i++) {
-        for (const [key, value] of Object.entries(daily)) {
-          _.set(obj, [key], [value][0][i]);
-        }
-
-        arr.push(obj);
-      }
-    }
-    return arr;
-  };
-
-  const week = useMemo(() => parseData(), []);
+  const [range, setRange] = useState<number>(3);
+  const [format, setFormat] = useState<string>('compact');
+  const week = useMemo(() => parseData(data), [data]);
 
   const returnWeather = useCallback((day: Weather, i: number) => {
-    return <Weather key={i} />;
-  }, []);
+    return <Weather key={i} variant={format} {...day} />;
+  }, [format]);
 
   if (router.isFallback) {
     return (
@@ -106,16 +64,32 @@ const City = ({ name, data }: ICity) => {
         <div className='container__header'>
           <h1>{_.capitalize(name)}</h1>
           <div className='container__row'>
-            <Button text='Today' />
-            <Button text='Three days' />
-            <Button text='Seven days' />
+            <Button
+              text='Today'
+              onClick={() => {
+                setRange(1);
+                setFormat('wide');
+              }}
+            />
+            <Button
+              text='Three days'
+              onClick={() => {
+                setRange(3);
+                setFormat('compact');
+              }}
+            />
+            <Button
+              text='Seven days'
+              onClick={() => {
+                setRange(7);
+                setFormat('compact');
+              }}
+            />
           </div>
         </div>
 
         <div className='container__content'>
-          {week.map((day: Weather, i: number) => returnWeather(day, i))}
-          <Weather />
-          <Weather />
+          {week.slice(0, range).map((day: Weather, i: number) => returnWeather(day, i))}
         </div>
       </section>
     </Layout>

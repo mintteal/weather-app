@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { formatDate, formatDay, formatTime } from '@/utils/helpers';
 import {
   PartlyCloudy,
   Snowflake,
@@ -7,13 +9,39 @@ import {
   Temperature,
 } from '@/utils/icons';
 
+interface IWeather {
+  time: string;
+  weathercode: number;
+  temperature_2m_max: number;
+  temperature_2m_min: number;
+  sunrise: string;
+  sunset: string;
+  rain_sum: number;
+  showers_sum: number;
+  snowfall_sum: number;
+}
 
-const Weather = () => {
+interface ICard extends IWeather {
+  variant: string;
+}
+
+const Weather = ({
+  time,
+  weathercode,
+  temperature_2m_max,
+  temperature_2m_min,
+  sunrise,
+  sunset,
+  rain_sum,
+  showers_sum,
+  snowfall_sum,
+  variant,
+}: ICard) => {
   return (
-    <div className='weather weather-wide'>
+    <div className={`weather weather-${variant}`}>
       <div className='weather__dates'>
-        <p>27.1.</p>
-        <p>Fri</p>
+        <p>{formatDate(time)}</p>
+        <p>{formatDay(time)}</p>
       </div>
 
       <div className='weather__info'>
@@ -24,20 +52,27 @@ const Weather = () => {
       <div className='weather__details'>
         <div className='weather__item'>
           <Temperature className='icon' />
-          <p>-1 - 2 &#176;C</p>
+          <p>
+            {temperature_2m_min} - {temperature_2m_max} &#176;C
+          </p>
         </div>
         <div className='weather__item'>
           <Snowflake className='icon' />
-          <p>0 cm</p>
+          <p>{snowfall_sum} cm</p>
         </div>
-        <div className='weather__item'>
-          <Sunrise className='icon' />
-          <p>08:58</p>
-        </div>
-        <div className='weather__item'>
-          <Sunset className='icon' />
-          <p>16:12</p>
-        </div>
+
+        {variant === 'wide' && (
+          <>
+            <div className='weather__item'>
+              <Sunrise className='icon' />
+              <p>{formatTime(sunrise)}</p>
+            </div>
+            <div className='weather__item'>
+              <Sunset className='icon' />
+              <p>{formatTime(sunset)}</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
