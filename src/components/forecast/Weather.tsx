@@ -2,6 +2,7 @@ import React from 'react';
 
 import { formatDate, formatDay, formatTime } from '@/utils/helpers';
 import {
+  Droplet,
   PartlyCloudy,
   Snowflake,
   Sunrise,
@@ -45,8 +46,9 @@ const Weather = ({
       </div>
 
       <div className='weather__info'>
-        <PartlyCloudy className='icon icon-compact' />
-        <p>Parly cloudy</p>
+        <div className={`icon icon-compact weather__icon weather__icon-${weathercode}`}></div>
+
+        <span className={`weather-${weathercode}`}></span>
       </div>
 
       <div className='weather__details'>
@@ -57,8 +59,14 @@ const Weather = ({
           </p>
         </div>
         <div className='weather__item'>
-          <Snowflake className='icon' />
-          <p>{snowfall_sum} cm</p>
+          {temperature_2m_min > 0 ? (
+            <Droplet className='icon' />
+          ) : (
+            <Snowflake className='icon' />
+          )}
+          <p>
+            {temperature_2m_min > 0 ? `${rain_sum} mm` : `${snowfall_sum} cm`}
+          </p>
         </div>
 
         {variant === 'wide' && (
