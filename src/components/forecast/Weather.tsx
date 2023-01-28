@@ -1,14 +1,15 @@
 import React from 'react';
-
+import { WeatherItem } from '../index';
 import { formatDate, formatDay, formatTime } from '@/utils/helpers';
 import {
   Droplet,
-  PartlyCloudy,
   Snowflake,
   Sunrise,
   Sunset,
   Temperature,
 } from '@/utils/icons';
+
+const codes = require('@/utils/weathercodes');
 
 interface IWeather {
   time: string;
@@ -41,44 +42,46 @@ const Weather = ({
   return (
     <div className={`weather weather-${variant}`}>
       <div className='weather__dates'>
-        <p>{formatDate(time)}</p>
-        <p>{formatDay(time)}</p>
+        <p className='md'>{formatDate(time)}</p>
+        <p className='sm subtle'>{formatDay(time)}</p>
       </div>
 
       <div className='weather__info'>
-        <div className={`icon icon-compact weather__icon weather__icon-${weathercode}`}></div>
-
-        <span className={`weather-${weathercode}`}></span>
+        <div className={`weather__icon weather__icon-${weathercode}`}></div>
+        <p title='Max temperature' className='xxl'>
+          {temperature_2m_max} &#176;C
+        </p>
+        <span className='sm subtle'>{codes.WEATHER[weathercode]}</span>
       </div>
 
       <div className='weather__details'>
-        <div className='weather__item'>
-          <Temperature className='icon' />
-          <p>
-            {temperature_2m_min} - {temperature_2m_max} &#176;C
-          </p>
-        </div>
-        <div className='weather__item'>
-          {temperature_2m_min > 0 ? (
-            <Droplet className='icon' />
-          ) : (
-            <Snowflake className='icon' />
-          )}
-          <p>
-            {temperature_2m_min > 0 ? `${rain_sum} mm` : `${snowfall_sum} cm`}
-          </p>
-        </div>
+        <WeatherItem
+          title='Min temperature'
+          icon={<Temperature />}
+          text={`${temperature_2m_min} °C`}
+        />
+
+        <WeatherItem
+          title='Precipitation'
+          icon={temperature_2m_min > 0 ? <Droplet /> : <Snowflake />}
+          text={
+            temperature_2m_min > 0 ? `${rain_sum} mm` : `${snowfall_sum} cm`
+          }
+        />
 
         {variant === 'wide' && (
           <>
-            <div className='weather__item'>
-              <Sunrise className='icon' />
-              <p>{formatTime(sunrise)}</p>
-            </div>
-            <div className='weather__item'>
-              <Sunset className='icon' />
-              <p>{formatTime(sunset)}</p>
-            </div>
+            <WeatherItem
+              title='Sunrise'
+              icon={<Sunrise />}
+              text={formatTime(sunrise)}
+            />
+
+            <WeatherItem
+              title='Sunset'
+              icon={<Sunset />}
+              text={formatTime(sunset)}
+            />
           </>
         )}
       </div>

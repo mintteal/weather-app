@@ -11,18 +11,31 @@
   color: $light;
 }
 
-[class$='-sm'] {
-  font-size: 1.25rem;
+.sm {
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
 }
 
-[class$='-md'] {
+.md {
   font-size: 1.5rem;
 }
 
-[class$='-lg'] {
+.lg {
   font-size: 1.75rem;
 }
 
-[class$='-xl'] {
+.xl {
   font-size: 2rem;
+}
+
+.xxl {
+  font-size: 2.25rem;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.subtle {
+  color: rgba($light, 0.7);
 }

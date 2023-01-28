@@ -30,9 +30,12 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
 
   &__content {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
   }
 }
@@ -53,8 +56,6 @@
 
 // variants
 .container-home {
-  align-items: center;
-  text-align: center;
   gap: 2rem;
   padding: 3rem 5rem;
 }
@@ -62,19 +63,20 @@
 .container-city {
   gap: 1rem;
   padding: 2rem;
-  margin: auto;
-  width: 90%;
-  height: 29rem;
-  background-color: rgba($light, 0.2);
-  border: 1px solid rgba($light, 0.2);
-  border-radius: 1rem;
+  height: 40rem;
+  min-width: fit-content;
+  margin-top: 2rem;
 
   .container__row {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
   }
-}
 
-main:has(.container-city) {
-  margin: auto;
+  .container__content {
+    background-color: rgba($light, 0.2);
+    border: 1px solid rgba($light, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+  }
 }

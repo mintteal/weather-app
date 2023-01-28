@@ -46,9 +46,13 @@ const City = ({ name, data }: ICity) => {
   const [format, setFormat] = useState<string>('compact');
   const week = useMemo(() => parseData(data), [data]);
 
-  const returnWeather = useCallback((day: Weather, i: number) => {
-    return <Weather key={i} variant={format} {...day} />;
-  }, [format]);
+
+  const returnWeather = useCallback(
+    (day: Weather, i: number) => {
+      return <Weather key={i} variant={format} {...day} />;
+    },
+    [format]
+  );
 
   if (router.isFallback) {
     return (
@@ -89,7 +93,9 @@ const City = ({ name, data }: ICity) => {
         </div>
 
         <div className='container__content'>
-          {week.slice(0, range).map((day: Weather, i: number) => returnWeather(day, i))}
+          {week
+            .slice(0, range)
+            .map((day: Weather, i: number) => returnWeather(day, i))}
         </div>
       </section>
     </Layout>
