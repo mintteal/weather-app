@@ -3,12 +3,10 @@ import { Button, Layout, Weather } from '@/components';
 import { parseData } from '@/utils/helpers';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
+import { IWeather } from '@/types/interfaces';
 let _ = require('lodash');
 
-interface ICity {
-  name: string;
-  data: any;
-}
+
 
 const options = [
   {
@@ -28,16 +26,9 @@ const options = [
   },
 ];
 
-interface Weather {
-  time: string;
-  weathercode: number;
-  temperature_2m_max: number;
-  temperature_2m_min: number;
-  sunrise: string;
-  sunset: string;
-  rain_sum: number;
-  showers_sum: number;
-  snowfall_sum: number;
+interface ICity {
+  name: string;
+  data: any;
 }
 
 const City = ({ name, data }: ICity) => {
@@ -48,7 +39,7 @@ const City = ({ name, data }: ICity) => {
 
 
   const returnWeather = useCallback(
-    (day: Weather, i: number) => {
+    (day: IWeather, i: number) => {
       return <Weather key={i} variant={format} {...day} />;
     },
     [format]
@@ -95,7 +86,7 @@ const City = ({ name, data }: ICity) => {
         <div className='container__content'>
           {week
             .slice(0, range)
-            .map((day: Weather, i: number) => returnWeather(day, i))}
+            .map((day: IWeather, i: number) => returnWeather(day, i))}
         </div>
       </section>
     </Layout>

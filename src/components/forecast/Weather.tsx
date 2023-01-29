@@ -8,20 +8,9 @@ import {
   Sunset,
   Temperature,
 } from '@/utils/icons';
+import { IWeather } from '@/types/interfaces';
 
 const codes = require('@/utils/weathercodes');
-
-interface IWeather {
-  time: string;
-  weathercode: number;
-  temperature_2m_max: number;
-  temperature_2m_min: number;
-  sunrise: string;
-  sunset: string;
-  rain_sum: number;
-  showers_sum: number;
-  snowfall_sum: number;
-}
 
 interface ICard extends IWeather {
   variant: string;
