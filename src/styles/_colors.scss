@@ -1,3 +1,4 @@
+$dark-0: #051720;
 $dark-1: #081b24;
 $dark-2: #152c39;
 $dark-3: #2c3640;
@@ -9,45 +10,10 @@ $accent-purple: #7a59a4;
 $accent-blue: #47a6db;
 $accent-yellow: #ecb13e;
 
-$gradient-primary: linear-gradient(
-  0deg,
-  rgba(236, 177, 62, 1) 0%,
-  rgba(122, 89, 164, 1) 100%
-);
-$gradient-secondary: linear-gradient(
-  0deg,
-  rgba(236, 177, 62, 1) 0%,
-  rgba(71, 166, 219, 1) 100%
-);
-
-
-
-$gradient-rainy: linear-gradient(
-  0deg,
-  #536e7d 0%,
-  #AAB2B6 100%
-);
-
-$gradient-clear: linear-gradient(
-  0deg,
-  #4EA3DB 0%,
-  #93D0F3 100%
-);
-
-$gradient-cloudy: linear-gradient(
-  0deg,
-  #5A97B4 0%,
-  #A2BBCB 100%
-);
-
-$gradient-snowy: linear-gradient(
-  0deg,
-  #3E6185 0%,
-  #A4C6E9 100%
-);
-
-$gradient-stormy: linear-gradient(
-  0deg,
-  #1E262E 0%,
-  #8C6935 100%
-);
+// Weather icon gradients
+$gradient-clear: linear-gradient(15deg, #4edbaa 0%, #ecac45 100%);
+$gradient-rainy: linear-gradient(0deg, #536e7d 0%, #aab2b6 100%);
+$gradient-fog: linear-gradient(0deg, #586972 0%, #abaed4 100%);
+$gradient-cloudy: linear-gradient(0deg, #5a97b4 0%, #a2bbcb 100%);
+$gradient-snowy: linear-gradient(0deg, #bfd3e7 0%, #a4c6e9 100%);
+$gradient-stormy: linear-gradient(200deg, #3e3956 40%, #d48f27 100%);

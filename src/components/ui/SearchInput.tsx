@@ -1,17 +1,13 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
-import Select from 'react-select';
+import React, { useCallback, useMemo, useState } from 'react';
+import Select, { Options } from 'react-select';
+import AsyncSelect, { useAsync } from 'react-select/async';
 import axios from 'axios';
 
 let _ = require('lodash');
 
-interface ISearch {
-  label: string;
-}
-
 // Default options
-
-const options = [
+const defaultOptions = [
   {
     value: 'helsinki',
     label: (
@@ -57,76 +53,116 @@ interface SearchProps {
   label: string;
 }
 
-const SearchInput = ({ label }: SearchProps) => {
-  const [query, setQuery] = useState<string>('');
+interface CityOption {
+  label: string;
+  value: JSX.Element;
+}
 
-  // Cities with 0 population are filtered out for clearer search results
-  const fetchResults = async (q: string) => {
+const SearchInput = ({ label }: SearchProps) => {
+  const [results, setResults] = useState<any>();
+
+  const fetchResults = (q: string) => {
     axios
       .get(`https://geocoding-api.open-meteo.com/v1/search?name=${q}`)
-      .then((res) =>
-        res.data.results.filter(
-          (city: { population: number }) => city.population > 0
-        )
-      )
       .then((data) => {
-        parseResults(data);
+        parseResults(data.data.results);
       });
   };
 
   // Geolocation is included in the query so weather page can fetch the correct data from serverSideProps
   const parseResults = (data: any) => {
-    const results = data;
-    console.log(results);
-    results.forEach(
-      (result: {
-        name: string;
-        latitude: number;
-        longitude: number;
-        country: string;
-        country_code: string;
-      }) => {
-        let obj = {
-          value: _.lowerCase(result.name),
-          label: (
-            <Link
-              href={{
-                pathname: `/weather/${_.lowerCase(result.name)}`,
-                query: {
-                  country: result.country,
-                  lat: result.latitude.toString(),
-                  lon: result.longitude.toString(),
-                },
-              }}
-            >
-              {result.name}, {result.country_code}
-            </Link>
-          ),
-        };
+    console.log('parseResults', data);
+    let arr: { value: any; label: JSX.Element }[] = [];
 
-        options.push(obj);
-      }
-    );
+    if (data) {
+      data.map(
+        (result: {
+          name: string;
+          latitude: number;
+          longitude: number;
+          country: string;
+          country_code: string;
+          admin1: string;
+        }) => {
+          let obj = {
+            value: _.lowerCase(result.name),
+            label: (
+              <Link
+                href={{
+                  pathname: `/weather/${_.lowerCase(result.name)}`,
+                  query: {
+                    country: result.country,
+                    lat: result.latitude.toString(),
+                    lon: result.longitude.toString(),
+                  },
+                }}
+              >
+                {result.name}, {result.admin1} ({result.country_code})
+              </Link>
+            ),
+          };
+          arr.push(obj);
+        }
+      );
+      setResults(arr);
+    }
   };
 
   const handleChange = (e: string) => {
-    setQuery(e);
-    if (e.length >= 3) {
+    if (e.length >= 2) {
+      // Run query if user types two or more characters
       fetchResults(e);
-    } else {
-      options.splice(3)
     }
+  };
+
+  const handleKeyDown = (e: any) => {
+    let current = e.currentTarget;
+    let focused = current.querySelector('.form__option--is-focused');
+
+    if (focused) {
+      let link = focused.querySelector('a');
+
+      if (e.key === 'Enter') {
+        window.location.href = link.href;
+      }
+    }
+  };
+
+  const filterCities = (inputValue: string) => {
+    console.log('results', results);
+
+    if (results && results.length > 0) {
+      return results.filter((i: any) =>
+        i.value.toLowerCase().includes(inputValue.toLowerCase())
+      );
+    } else {
+      return null;
+    }
+  };
+
+  const loadOptions = (
+    inputValue: string,
+    callback: (options: any) => void
+  ) => {
+    setTimeout(() => {
+      callback(filterCities(inputValue));
+    }, 250);
   };
 
   return (
     <label className='form__label'>
       {_.capitalize(label)}
-      <Select
-        instanceId={'cityselect'}
+
+      <AsyncSelect
+        placeholder='Search'
         onInputChange={handleChange}
+        onKeyDown={(e) => handleKeyDown(e)}
+        instanceId={'cityselect'}
         className='form__input form__input-search'
+        name='search_city'
         classNamePrefix='form'
-        options={_.uniqWith(options, _.isEqual)}
+        defaultOptions={defaultOptions}
+        loadOptions={loadOptions}
       />
     </label>
   );

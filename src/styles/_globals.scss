@@ -13,12 +13,13 @@ body {
 }
 
 body {
-  background: $dark-2;
+  background: $dark-1;
 }
 
 #__next {
   display: flex;
   height: 100%;
+  
 }
 
 main {
@@ -26,6 +27,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  overflow-y: auto;
 }
 
 li {
@@ -34,4 +36,9 @@ li {
 
 a {
   text-decoration: none;
+  transition: color .15s ease-out;
+
+  &:hover {
+    color: $accent-blue;
+  }
 }

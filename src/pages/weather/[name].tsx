@@ -15,8 +15,8 @@ const City = ({ data }: ICity) => {
 
   console.log(router.query)
 
-  const [range, setRange] = useState<number>(3);
-  const [format, setFormat] = useState<string>('compact');
+  const [range, setRange] = useState<number>(1);
+  const [format, setFormat] = useState<string>('wide');
 
   const week = useMemo(() => parseData(data), [data]);
 
@@ -39,7 +39,7 @@ const City = ({ data }: ICity) => {
     <Layout>
       <section className='container container-city'>
         <div className='container__header'>
-          <h1>{_.capitalize(router.query.name)}</h1>
+          <h1>{_.startCase(router.query.name)}</h1>
           <p className='subtle'>{router.query.country}</p>
           <div className='container__row'>
             <Button

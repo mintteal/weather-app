@@ -11,18 +11,37 @@
   color: black;
 }
 
-.form__menu * {
-  font-size: 0.9rem;
+.form__menu-list {
+  padding: 0 !important;
+}
+
+.form__option {
+  padding: 0 !important;
+
+  &--is-focused,
+  &--is-selected {
+    background-color: rgba($accent-yellow, 0.5) !important;
+  }
+}
+
+.form__option a {
+  display: flex;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.9rem !important;
+
+  &:hover {
+    color: $dark-1;
+  }
 }
 
 //// Buttons
 .btn {
   background: transparent;
   border: none;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
 
   font-size: 1rem;
-  padding: 0.25rem 2rem;
+  padding: 0.25rem 1rem;
   width: fit-content;
   cursor: pointer;
   transition: all 0.1s;
@@ -39,15 +58,18 @@
   background-color: $dark-2;
   padding: 0.5rem 2rem;
 
-  &:is(:hover, :focus) {
-    background-color: rgba($dark-1, 0.6);
+  &:is(:hover, :active) {
+    color: $accent-yellow;
+    background-color: $dark-3;
   }
 }
 
 .btn-outlined {
+  font-size: 1.15rem;
   outline: 1px solid white;
 
-  &:is(:hover, :focus) {
+  &:hover,
+  &:focus {
     color: $accent-yellow;
     background: rgba($accent-yellow, 0.1);
     outline: 1px solid $accent-yellow;

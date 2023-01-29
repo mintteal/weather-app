@@ -5,9 +5,6 @@ export default function Home() {
   return (
     <Layout home={true}>
       <section className='container container-home'>
-        <div className='container__header'>
-          <p>Start by selecting a city</p>
-        </div>
         <div className='container__content'>
           <Link
             href={{

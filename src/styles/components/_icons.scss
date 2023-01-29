@@ -27,9 +27,9 @@
   }
 }
 
+
+
 // Weather icons
-
-
 .weather__icon {
   
   $size: 6rem;
@@ -37,7 +37,6 @@
   width: $size;
   mask-size: $size $size !important;
   mask-repeat: no-repeat !important;
-  background: $gradient-primary;
 
   // Clear sky
   &-0 {
@@ -67,7 +66,7 @@
   &-45,
   &-48 {
     mask: url('../../../public/icons/cloud-fog2.svg');
-    background: $gradient-cloudy;
+    background: $gradient-fog;
   }
 
   // Slight or moderate rain

@@ -3,16 +3,16 @@
 // Base
 .weather {
   border-radius: 1rem;
-  background: rgba($dark-1, 0.5);
+  background: $dark-2;
   padding: 0.75rem 1rem;
-  border: 1px solid rgba($accent-blue, 0.2);
+  border: 1px solid rgba($accent-yellow, 0.3);
   box-shadow: 0 0 0.75rem 0 rgba($dark-1, 0.3);
   height: 20rem;
 
-  transition: background 0.1s ease-out;
+  transition: background-color 0.1s ease-out;
 
   &:hover {
-    background: rgba($dark-1, 0.6);
+    background: rgba($dark-1, 0.7);
   }
 }
 
@@ -35,7 +35,7 @@
   gap: 0.5rem;
 
   svg {
-    fill: $accent-blue;
+    fill: $accent-yellow;
   }
 }
 
@@ -68,7 +68,7 @@
 
   .weather__item:nth-child(2) {
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba($accent-blue, 0.5);
+    border-bottom: 1px solid rgba($accent-yellow, 0.5);
   }
 
   .weather__item svg {
@@ -96,7 +96,7 @@
     grid-template-columns: 1fr 1fr;
     padding-top: 0.75rem;
     white-space: nowrap;
-    border-top: 1px solid rgba($accent-blue, 0.5);
+    border-top: 1px solid rgba($accent-yellow, 0.5);
   }
 
   .weather__item {
@@ -108,3 +108,5 @@
     }
   }
 }
+
+
