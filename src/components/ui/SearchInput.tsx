@@ -9,6 +9,8 @@ interface ISearch {
   label: string;
 }
 
+// Default options
+
 const options = [
   {
     value: 'helsinki',
@@ -16,10 +18,10 @@ const options = [
       <Link
         href={{
           pathname: '/weather/helsinki/',
-          query: { lat: '60.17', lon: '24.95' },
+          query: { country: 'Finland', lat: '60.17', lon: '24.95' },
         }}
       >
-        Helsinki
+        Helsinki, FI
       </Link>
     ),
   },
@@ -29,10 +31,10 @@ const options = [
       <Link
         href={{
           pathname: '/weather/tampere/',
-          query: { lat: '61.5', lon: '23.8' },
+          query: { country: 'Finland', lat: '61.5', lon: '23.8' },
         }}
       >
-        Tampere
+        Tampere, FI
       </Link>
     ),
   },
@@ -42,10 +44,10 @@ const options = [
       <Link
         href={{
           pathname: '/weather/turku/',
-          query: { lat: '60.45', lon: '22.28' },
+          query: { country: 'Finland', lat: '60.45', lon: '22.28' },
         }}
       >
-        Turku
+        Turku, FI
       </Link>
     ),
   },
@@ -58,11 +60,8 @@ interface SearchProps {
 const SearchInput = ({ label }: SearchProps) => {
   const [query, setQuery] = useState<string>('');
 
-
-   // Cities with 0 population are filtered out for clearer search results
+  // Cities with 0 population are filtered out for clearer search results
   const fetchResults = async (q: string) => {
-    
-
     axios
       .get(`https://geocoding-api.open-meteo.com/v1/search?name=${q}`)
       .then((res) =>
@@ -75,13 +74,18 @@ const SearchInput = ({ label }: SearchProps) => {
       });
   };
 
-  
   // Geolocation is included in the query so weather page can fetch the correct data from serverSideProps
   const parseResults = (data: any) => {
     const results = data;
-
+    console.log(results);
     results.forEach(
-      (result: { name: any; latitude: number; longitude: number }) => {
+      (result: {
+        name: string;
+        latitude: number;
+        longitude: number;
+        country: string;
+        country_code: string;
+      }) => {
         let obj = {
           value: _.lowerCase(result.name),
           label: (
@@ -89,12 +93,13 @@ const SearchInput = ({ label }: SearchProps) => {
               href={{
                 pathname: `/weather/${_.lowerCase(result.name)}`,
                 query: {
+                  country: result.country,
                   lat: result.latitude.toString(),
                   lon: result.longitude.toString(),
                 },
               }}
             >
-              {result.name}
+              {result.name}, {result.country_code}
             </Link>
           ),
         };
@@ -108,6 +113,8 @@ const SearchInput = ({ label }: SearchProps) => {
     setQuery(e);
     if (e.length >= 3) {
       fetchResults(e);
+    } else {
+      options.splice(3)
     }
   };
 

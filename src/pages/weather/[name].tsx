@@ -6,30 +6,14 @@ import { useRouter } from 'next/router';
 import { IWeather } from '@/types/interfaces';
 let _ = require('lodash');
 
-/* const options = [
-  {
-    value: 'helsinki',
-    lat: 60.17,
-    lon: 24.95,
-  },
-  {
-    value: 'tampere',
-    lat: 61.5,
-    lon: 23.8,
-  },
-  {
-    value: 'turku',
-    lat: 60.45,
-    lon: 22.28,
-  },
-]; */
-
 interface ICity {
   data: any;
 }
 
 const City = ({ data }: ICity) => {
   const router = useRouter();
+
+  console.log(router.query)
 
   const [range, setRange] = useState<number>(3);
   const [format, setFormat] = useState<string>('compact');
@@ -55,7 +39,8 @@ const City = ({ data }: ICity) => {
     <Layout>
       <section className='container container-city'>
         <div className='container__header'>
-          <h1>{_.capitalize(name)}</h1>
+          <h1>{_.capitalize(router.query.name)}</h1>
+          <p className='subtle'>{router.query.country}</p>
           <div className='container__row'>
             <Button
               text='Today'
