@@ -1,14 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Button, Layout, Weather } from '@/components';
 import { parseData } from '@/utils/helpers';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { IWeather } from '@/types/interfaces';
 let _ = require('lodash');
 
-
-
-const options = [
+/* const options = [
   {
     value: 'helsinki',
     lat: 60.17,
@@ -24,19 +22,19 @@ const options = [
     lat: 60.45,
     lon: 22.28,
   },
-];
+]; */
 
 interface ICity {
-  name: string;
   data: any;
 }
 
-const City = ({ name, data }: ICity) => {
+const City = ({ data }: ICity) => {
   const router = useRouter();
+
   const [range, setRange] = useState<number>(3);
   const [format, setFormat] = useState<string>('compact');
-  const week = useMemo(() => parseData(data), [data]);
 
+  const week = useMemo(() => parseData(data), [data]);
 
   const returnWeather = useCallback(
     (day: IWeather, i: number) => {
@@ -95,24 +93,14 @@ const City = ({ name, data }: ICity) => {
 
 export default City;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [{ params: { name: '*' } }],
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const name = (await params?.name) as string;
-  const city = await options.find((option) => option.value === name);
-
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const settings =
     '&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,rain_sum,showers_sum,snowfall_sum&timezone=auto';
 
   const res = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${city?.lat}&longitude=${city?.lon}${settings}`
+    `https://api.open-meteo.com/v1/forecast?latitude=${context.query.lat}&longitude=${context.query.lon}${settings}`
   );
   const data = await res.json();
 
-  return { props: { name, data } };
+  return { props: { data } };
 };
