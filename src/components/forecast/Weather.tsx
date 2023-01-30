@@ -24,7 +24,6 @@ const Weather = ({
   sunrise,
   sunset,
   rain_sum,
-  showers_sum,
   snowfall_sum,
   variant,
 }: ICard) => {

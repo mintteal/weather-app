@@ -1,3 +1,4 @@
+import { IWeather } from '@/types/interfaces';
 let _ = require('lodash');
 
 interface Data {
@@ -6,19 +7,7 @@ interface Data {
   };
 }
 
-interface Weather {
-  time: string;
-  weathercode: number;
-  temperature_2m_max: number;
-  temperature_2m_min: number;
-  sunrise: string;
-  sunset: string;
-  rain_sum: number;
-  showers_sum: number;
-  snowfall_sum: number;
-}
-
-export const parseData = (data: any) => {
+export const parseData = (data: any): IWeather[] => {
   let arr: any = [];
 
   if (data) {
@@ -26,13 +15,13 @@ export const parseData = (data: any) => {
     let daily: Data[] = data.daily;
 
     /* 
-        API returns data for seven days, so iterate through object entries
-        for seven times and set connected values to an object. 
-        Push every object into an array.
-        */
+      API returns data for seven days, so iterate through object entries
+      for seven times and collect items into an object. 
+      Push every object into an array.
+    */
 
     for (let i = 0; i < 7; i++) {
-      let obj: Weather = {
+      let obj: IWeather = {
         time: '',
         weathercode: 0,
         temperature_2m_max: 0,
@@ -57,21 +46,21 @@ export const parseData = (data: any) => {
 
 /// Formatting
 
-export const formatTime = (date: string) => {
+export const formatTime = (date: string): string => {
   return Intl.DateTimeFormat('fi-FI', {
     hour: '2-digit',
     minute: '2-digit',
   }).format(new Date(date));
 };
 
-export const formatDate = (date: string) => {
+export const formatDate = (date: string): string => {
   return Intl.DateTimeFormat('fi-FI', {
     day: '2-digit',
     month: '2-digit',
   }).format(new Date(date));
 };
 
-export const formatDay = (date: string) => {
+export const formatDay = (date: string): string => {
   return Intl.DateTimeFormat('fi-FI', {
     weekday: 'short',
   }).format(new Date(date));

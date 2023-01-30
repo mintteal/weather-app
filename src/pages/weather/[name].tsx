@@ -36,10 +36,11 @@ const City = ({ data }: ICity) => {
   }
 
   return (
-    <Layout>
+    <Layout title={_.startCase(router.query.name)}>
+
       <section className='container container-city'>
         <div className='container__header'>
-          <h1>{_.startCase(router.query.name)}</h1>
+          <h1 className='xl'>{_.startCase(router.query.name)}</h1>
           <p className='subtle'>{router.query.country}</p>
           <div className='container__row'>
             <Button

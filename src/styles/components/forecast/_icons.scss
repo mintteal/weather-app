@@ -1,0 +1,98 @@
+@use '../../colors' as *;
+
+// Weather icons
+.weather__icon {
+  $size: 6rem;
+  height: $size;
+  width: $size;
+  mask-size: $size $size !important;
+  mask-repeat: no-repeat !important;
+
+  // Clear sky
+  &-0 {
+    mask: url('../../../../public/icons/sun.svg');
+    background: $gradient-clear;
+  }
+
+  // Mainly clear
+  &-1 {
+    mask: url('../../../../public/icons/cloud-sun.svg');
+    background: $gradient-clear;
+  }
+
+  // Partly cloudy
+  &-2 {
+    mask: url('../../../../public/icons/cloud.svg');
+    background: $gradient-cloudy;
+  }
+
+  // Overcast
+  &-3 {
+    mask: url('../../../../public/icons/clouds.svg');
+    background: $gradient-cloudy;
+  }
+
+  // Fog
+  &-45,
+  &-48 {
+    mask: url('../../../../public/icons/cloud-fog2.svg');
+    background: $gradient-fog;
+  }
+
+  // Slight or moderate rain
+  &-61,
+  &-63 {
+    mask: url('../../../../public/icons/cloud-rain.svg');
+    background: $gradient-rainy;
+  }
+  // Heavy rain
+  &-64 {
+    mask: url('../../../../public/icons/cloud-rain-heavy.svg');
+    background: $gradient-rainy;
+  }
+
+  &-80,
+  &-81,
+  &-82 {
+    mask: url('../../../../public/icons/cloud-drizzle.svg');
+    background: $gradient-rainy;
+  }
+
+  &-66,
+  &-67 {
+    mask: url('../../../../public/icons/cloud-hail.svg');
+    background: $gradient-rainy;
+  }
+
+  // Drizzle
+  &-51,
+  &-53,
+  &-55 {
+    mask: url('../../../../public/icons/cloud-sleet.svg');
+    background: $gradient-rainy;
+  }
+
+  // Snow
+  &-71,
+  &-73,
+  &-75,
+  &-77,
+  &-85,
+  &-86 {
+    mask: url('../../../../public/icons/cloud-snow.svg');
+    background: $gradient-snowy;
+  }
+
+  // Thunderstorm
+  &-95 {
+    mask: url('../../../../public/icons/cloud-lightning.svg');
+    background: $gradient-stormy;
+  }
+
+  // Thunderstorm with hail
+  &-96,
+  &-99 {
+    mask: url('../../../../public/icons/cloud-lightning-rain.svg');
+    background: $gradient-stormy;
+  }
+}

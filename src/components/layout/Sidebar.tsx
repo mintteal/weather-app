@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Button } from '..';
+import { Search } from '..';
 import { Logo, PrevIcon } from '@/utils/icons';
 import Link from 'next/link';
 
@@ -11,7 +11,7 @@ const Sidebar = ({ home }: ISidebar) => {
   return (
     <aside className='sidebar'>
       <div className='sidebar__content'>
-        <Logo className='icon icon-site' />
+        <Logo className='site-logo' />
 
         <div className='sidebar__description'>
           <p className='sidebar__title xl'>

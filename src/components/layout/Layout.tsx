@@ -5,15 +5,15 @@ import { Sidebar } from '../index';
 interface ISite {
   home?: boolean;
   title?: string;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
-const Layout = ({ home, title = 'Weather App', children }: ISite) => {
+const Layout = ({ home, title, children }: ISite) => {
   return (
     <>
       <Head>
-        <title>{title}</title>
-        <meta name='description' content='A weather app made with Next.js' />
+        <title>TWS {title}</title>
+        <meta name='description' content='A weather service app made with Next.js' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>

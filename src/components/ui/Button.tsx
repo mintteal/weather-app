@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ButtonProps {
-  onClick?: React.MouseEventHandler;
+  onClick: React.MouseEventHandler;
   icon?: React.SVGProps<SVGElement>;
   text: string;
   variant?: string;

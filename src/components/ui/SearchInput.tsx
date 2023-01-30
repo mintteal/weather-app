@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import React, { useCallback, useMemo, useState } from 'react';
-import Select, { Options } from 'react-select';
-import AsyncSelect, { useAsync } from 'react-select/async';
+import React, { useCallback, useState } from 'react';
+import AsyncSelect from 'react-select/async';
 import axios from 'axios';
 
 let _ = require('lodash');
@@ -53,11 +52,6 @@ interface SearchProps {
   label: string;
 }
 
-interface CityOption {
-  label: string;
-  value: JSX.Element;
-}
-
 const SearchInput = ({ label }: SearchProps) => {
   const [results, setResults] = useState<any>();
 
@@ -71,7 +65,6 @@ const SearchInput = ({ label }: SearchProps) => {
 
   // Geolocation is included in the query so weather page can fetch the correct data from serverSideProps
   const parseResults = (data: any) => {
-    console.log('parseResults', data);
     let arr: { value: any; label: JSX.Element }[] = [];
 
     if (data) {
@@ -108,13 +101,14 @@ const SearchInput = ({ label }: SearchProps) => {
     }
   };
 
+  // Run query only after user has typed two or more characters
   const handleChange = (e: string) => {
     if (e.length >= 2) {
-      // Run query if user types two or more characters
       fetchResults(e);
     }
   };
 
+  // Detect enter key and redirect user to correct url
   const handleKeyDown = (e: any) => {
     let current = e.currentTarget;
     let focused = current.querySelector('.form__option--is-focused');
@@ -129,8 +123,6 @@ const SearchInput = ({ label }: SearchProps) => {
   };
 
   const filterCities = (inputValue: string) => {
-    console.log('results', results);
-
     if (results && results.length > 0) {
       return results.filter((i: any) =>
         i.value.toLowerCase().includes(inputValue.toLowerCase())
